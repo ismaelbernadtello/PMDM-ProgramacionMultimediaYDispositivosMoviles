@@ -12,6 +12,16 @@
         </ui:define>
         <ui:define name="body">
             <h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 69%; float: left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="unAutor" value="#{libroController.autor}">
+                            <f:selectItems value="#{autorController.itemsAvailableSelectOne}"></f:selectItems>
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:toolbar>
+            </h:form>
+            
+            <h:form>
                 <p:dataTable value="#{libroController.items}" var="libro" style="border:solid 1px"
                          paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20" >
                     <p:column headerText="Cód." sortBy="#{libro.codLibro}" width="50" style="text-align: center">
@@ -48,14 +58,7 @@
                     <p:column headerText="Pelicula">
                         <h:graphicImage rendered="#{libro.tienePelicula(libro)}" library="iconos" name="trailer.png" height="45px"/>
                     </p:column>
-                    
-                    <p:column width="150">
-                        <h:commandLink action="#{libroController.prepareView}" value="#{bundle.ListLibroViewLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{libroController.prepareEdit}" value="#{bundle.ListLibroEditLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{libroController.destroy}" value="#{bundle.ListLibroDestroyLink}"/>
-                    </p:column>
+                
                 </p:dataTable>
                 <br />
                 <h:commandLink action="#{libroController.prepareCreate}" value="#{bundle.ListLibroCreateLink}"/>

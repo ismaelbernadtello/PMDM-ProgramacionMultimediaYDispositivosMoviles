@@ -4,6 +4,9 @@ import Modelos.Libro;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
 import Repositorios.LibroFacade;
+import Modelos.Autor;
+import java.util.*;
+
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -28,10 +31,32 @@ public class LibroController implements Serializable {
     private Repositorios.LibroFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private Autor autor;
+    private List<Libro> lista;
+    
     public LibroController() {
     }
 
+    public List<Libro> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Libro> lista) {
+        this.lista = lista;
+    }
+
+    
+    
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    
+    
     public Libro getSelected() {
         if (current == null) {
             current = new Libro();
@@ -46,7 +71,7 @@ public class LibroController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(this.getItemsAvailableSelectOne().length) {
 
                 @Override
                 public int getItemsCount() {
@@ -231,5 +256,11 @@ public class LibroController implements Serializable {
         }
 
     }
+        public boolean tienePelicula(Libro libro){
+        if(libro.getPelicula() == "")
+            return false;
+        return true;
+    }
+        
 
 }
