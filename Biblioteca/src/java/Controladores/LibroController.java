@@ -3,12 +3,11 @@ package Controladores;
 import Modelos.Libro;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
-import Repositorios.LibroFacade;
 import Modelos.Autor;
-import java.util.*;
-
+import Repositorios.LibroFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -32,20 +31,11 @@ public class LibroController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private Autor autor;
-    private List<Libro> lista;
-    
+    private List<Libro> listaAutor;
+
+
     public LibroController() {
     }
-
-    public List<Libro> getLista() {
-        return lista;
-    }
-
-    public void setLista(List<Libro> lista) {
-        this.lista = lista;
-    }
-
-    
     
     public Autor getAutor() {
         return autor;
@@ -55,7 +45,13 @@ public class LibroController implements Serializable {
         this.autor = autor;
     }
 
-    
+    public List<Libro> getListaAutor() {
+        return listaAutor;
+    }
+
+    public void setListaAutor(List<Libro> listaAutor) {
+        this.listaAutor = listaAutor;
+    }
     
     public Libro getSelected() {
         if (current == null) {
@@ -254,13 +250,14 @@ public class LibroController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Libro.class.getName());
             }
         }
-
     }
-        public boolean tienePelicula(Libro libro){
-        if(libro.getPelicula() == "")
-            return false;
-        return true;
+    public boolean tienePelicula(Libro libro){
+            if(libro.getPelicula() == "")
+                return false;
+            return true;
     }
-        
+    public void cargarLista(){
+        listaAutor = ejbFacade.LibrosPorAutor(autor);
+    }
 
 }
