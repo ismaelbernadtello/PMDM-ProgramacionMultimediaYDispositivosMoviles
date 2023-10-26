@@ -34,26 +34,10 @@ public class LibroController implements Serializable {
     private Autor autor;
     private List<Libro> listaAutor;
     private Premio premio;
-    private List<Libro> lista2;
+    private List<Premio> listaPremio;
 
 
     public LibroController() {
-    }
-
-    public Premio getPremio() {
-        return premio;
-    }
-
-    public void setPremio(Premio premio) {
-        this.premio = premio;
-    }
-
-    public List<Libro> getLista2() {
-        return lista2;
-    }
-
-    public void setLista2(List<Libro> lista2) {
-        this.lista2 = lista2;
     }
     
     public Autor getAutor() {
@@ -71,6 +55,23 @@ public class LibroController implements Serializable {
     public void setListaAutor(List<Libro> listaAutor) {
         this.listaAutor = listaAutor;
     }
+
+    public Premio getPremio() {
+        return premio;
+    }
+
+    public void setPremio(Premio premio) {
+        this.premio = premio;
+    }
+
+    public List<Premio> getListaPremio() {
+        return listaPremio;
+    }
+
+    public void setListaPremio(List<Premio> listaPremio) {
+        this.listaPremio = listaPremio;
+    }
+    
     
     public Libro getSelected() {
         if (current == null) {
@@ -276,13 +277,10 @@ public class LibroController implements Serializable {
             return true;
     }
     public void cargarLista(){
-        listaAutor = ejbFacade.LibrosPorAutor(autor);
+        listaAutor = ejbFacade.LibrosPorAutor(autor); 
     }
-    
-    
-    
-    public void cargarLista2(){
-        lista2 = ejbFacade.LibrosPorPremio(premio);
+    public void cargarListaPremio(){
+        listaPremio = ejbFacade.LibrosPorPremio(premio);
     }
-    
+
 }
