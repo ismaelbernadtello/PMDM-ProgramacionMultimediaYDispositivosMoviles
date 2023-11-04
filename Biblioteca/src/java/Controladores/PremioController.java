@@ -4,6 +4,8 @@ import Modelos.Premio;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
 import Repositorios.PremioFacade;
+import Modelos.Autor;
+import Modelos.AutorPremio;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,8 +31,25 @@ public class PremioController implements Serializable {
     private Repositorios.PremioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private Autor autor;
+    private List<AutorPremio> premioList;
     public PremioController() {
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public List<AutorPremio> getPremioList() {
+        return premioList;
+    }
+
+    public void setPremioList(List<AutorPremio> premioList) {
+        this.premioList = premioList;
     }
 
     public Premio getSelected() {
@@ -194,7 +213,7 @@ public class PremioController implements Serializable {
     
     public SelectItem[] getItemsPorAutor() {
         //return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
-        return getSelectPremio(ejbFacade.premiosAutorOrdenados(), true);
+        return getSelectPremio(ejbFacade.premiosAutorOrdenados(), false);
     }
     public SelectItem[] getItemsPorLibro() {
         //return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
@@ -208,7 +227,7 @@ public class PremioController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Premio.class)
+    @FacesConverter(forClass = Premio.class, value="premiosConverter")
     public static class PremioControllerConverter implements Converter {
 
         @Override
@@ -259,5 +278,9 @@ public class PremioController implements Serializable {
             items[i++] = new SelectItem(x, x.getNomPremio());
         }
         return items;
+    }
+    public void cargarListaPremios(){
+       premioList = ejbFacade.premiosPorAutorOrdenados(autor);
+    
     }
 }

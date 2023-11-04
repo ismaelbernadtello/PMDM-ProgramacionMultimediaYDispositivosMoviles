@@ -12,6 +12,8 @@ package Controladores;
 import Modelos.Autor;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.AutorPremio;
+import Modelos.Premio;
 import Repositorios.AutorFacade;
 
 import java.io.Serializable;
@@ -41,8 +43,26 @@ public class AutorController implements Serializable {
     private Repositorios.AutorFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Premio premio;
+    private List<AutorPremio> autoresList;
 
     public AutorController() {
+    }
+
+    public Premio getPremio() {
+        return premio;
+    }
+
+    public void setPremio(Premio premio) {
+        this.premio = premio;
+    }
+
+    public List<AutorPremio> getAutoresList() {
+        return autoresList;
+    }
+
+    public void setAutoresList(List<AutorPremio> autoresList) {
+        this.autoresList = autoresList;
     }
 
     public Autor getSelected() {
@@ -208,7 +228,7 @@ public class AutorController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Autor.class)
+    @FacesConverter(forClass = Autor.class, value="autoresConverter") //hay que darle el value para la validación
     public static class AutorControllerConverter implements Converter {
 
         @Override
@@ -276,4 +296,9 @@ public class AutorController implements Serializable {
             return true;
         return false;
     }
+    public void cargarListaAutores(){
+       autoresList = ejbFacade.autoresPorPremio(premio);
+    
+    }
+    
 }

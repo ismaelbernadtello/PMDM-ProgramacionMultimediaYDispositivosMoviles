@@ -3,9 +3,12 @@ package Controladores;
 import Modelos.AutorPremio;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Autor;
+import Modelos.Premio;
 import Repositorios.AutorPremioFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,10 +31,7 @@ public class AutorPremioController implements Serializable {
     private Repositorios.AutorPremioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
-    public AutorPremioController() {
-    }
-
+    
     public AutorPremio getSelected() {
         if (current == null) {
             current = new AutorPremio();
@@ -47,7 +47,7 @@ public class AutorPremioController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(this.getItemsAvailableSelectOne().length) {
 
                 @Override
                 public int getItemsCount() {
