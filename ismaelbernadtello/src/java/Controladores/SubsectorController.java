@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.SubsectorFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class SubsectorController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectSubsector(ejbFacade.findAll(), true);
     }
 
     public Subsector getSubsector(java.lang.Integer id) {
@@ -230,6 +232,16 @@ public class SubsectorController implements Serializable {
             }
         }
 
+    }
+    
+    public static SelectItem[] getSelectSubsector(List<Subsector> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
+
+        for (Subsector x : entities) {
+            items[i++] = new SelectItem(x, x.getNomSubsector());
+        }
+        return items;
     }
 
 }

@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.TecnicoFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class TecnicoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectTecnico(ejbFacade.findAll(),true);
     }
 
     public Tecnico getTecnico(java.lang.Integer id) {
@@ -229,7 +231,17 @@ public class TecnicoController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Tecnico.class.getName());
             }
         }
-
+        
     }
+    
+        public static SelectItem[] getSelectTecnico(List<Tecnico> entities, boolean selectOne) {
+            SelectItem[] items = new SelectItem[entities.size()];
+            int i = 0;
+
+            for (Tecnico x : entities) {
+                items[i++] = new SelectItem(x, x.getNomTecnico());
+            }
+            return items;
+        }
 
 }

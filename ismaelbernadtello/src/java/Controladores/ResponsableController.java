@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.ResponsableFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class ResponsableController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectResponsable(ejbFacade.findAll(), true);
     }
 
     public Responsable getResponsable(java.lang.Integer id) {
@@ -230,6 +232,16 @@ public class ResponsableController implements Serializable {
             }
         }
 
+    }
+    
+    public static SelectItem[] getSelectResponsable(List<Responsable> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
+
+        for (Responsable x : entities) {
+            items[i++] = new SelectItem(x, x.getNomResponsable());
+        }
+        return items;
     }
 
 }

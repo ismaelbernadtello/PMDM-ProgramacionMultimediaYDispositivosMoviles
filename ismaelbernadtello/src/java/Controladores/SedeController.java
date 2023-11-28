@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.SedeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class SedeController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectSede(ejbFacade.findAll(), true);
     }
 
     public Sede getSede(java.lang.String id) {
@@ -230,6 +232,16 @@ public class SedeController implements Serializable {
             }
         }
 
+    }
+    
+    public static SelectItem[] getSelectSede(List<Sede> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
+
+        for (Sede x : entities) {
+            items[i++] = new SelectItem(x, x.getNomSede());
+        }
+        return items;
     }
 
 }

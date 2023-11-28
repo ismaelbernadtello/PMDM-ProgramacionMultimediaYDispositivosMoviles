@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.ProyectoFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class ProyectoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectProyecto(ejbFacade.findAll(), true);
     }
 
     public Proyecto getProyecto(java.lang.Integer id) {
@@ -230,6 +232,16 @@ public class ProyectoController implements Serializable {
             }
         }
 
+    }
+    
+    public static SelectItem[] getSelectProyecto(List<Proyecto> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
+
+        for (Proyecto x : entities) {
+            items[i++] = new SelectItem(x, x.getTitulo());
+        }
+        return items;
     }
 
 }

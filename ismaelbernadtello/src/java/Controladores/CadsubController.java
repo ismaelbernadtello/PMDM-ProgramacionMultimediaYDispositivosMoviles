@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.CadsubFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class CadsubController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectCadsub(ejbFacade.findAll(), true);
     }
 
     public Cadsub getCadsub(java.lang.Integer id) {
@@ -231,5 +233,15 @@ public class CadsubController implements Serializable {
         }
 
     }
+    
+    public static SelectItem[] getSelectCadsub(List<Cadsub> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
 
+        for (Cadsub x : entities) {
+            items[i++] = new SelectItem(x, x.getNomSubcad());
+        }
+        return items;
+    }
+    
 }

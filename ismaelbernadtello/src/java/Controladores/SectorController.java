@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.SectorFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class SectorController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectSector(ejbFacade.findAll(), true);
     }
 
     public Sector getSector(java.lang.Integer id) {
@@ -230,6 +232,16 @@ public class SectorController implements Serializable {
             }
         }
 
+    }
+    
+    public static SelectItem[] getSelectSector(List<Sector> entities, boolean selectOne) {
+        SelectItem[] items = new SelectItem[entities.size()];
+        int i = 0;
+
+        for (Sector x : entities) {
+            items[i++] = new SelectItem(x, x.getNomSector());
+        }
+        return items;
     }
 
 }

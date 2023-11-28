@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Repositorios.TipoentidadFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -185,7 +186,8 @@ public class TipoentidadController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectTipoentidad(ejbFacade.findAll(), true);
     }
 
     public Tipoentidad getTipoentidad(java.lang.Integer id) {
@@ -231,5 +233,15 @@ public class TipoentidadController implements Serializable {
         }
 
     }
+    
+    public static SelectItem[] getSelectTipoentidad(List<Tipoentidad> entities, boolean selectOne) {
+            SelectItem[] items = new SelectItem[entities.size()];
+            int i = 0;
+
+            for (Tipoentidad x : entities) {
+                items[i++] = new SelectItem(x, x.getNomTipo());
+            }
+            return items;
+        }
 
 }
