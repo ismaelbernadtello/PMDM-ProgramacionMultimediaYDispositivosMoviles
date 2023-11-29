@@ -167,7 +167,7 @@
                     <h:outputLabel value="#{bundle.EditProyectoLabel_inspectoria}" for="inspectoria" />
                     <h:selectOneMenu id="inspectoria" value="#{proyectoController.selected.inspectoria}" title="#{bundle.EditProyectoTitle_inspectoria}" >
                         <f:selectItems value="#{inspectoriaController.itemsAvailableSelectOne}"/> 
-                    <!-- si peta por aquí, poner el Boolean SelecOne a False para no crear la primera linea del if "---"----" que no es un objeto de la clase inspectoria-->
+                    <!-- si peta por aquí, poner el Boolean SelecOne a False para no crear la primera linea del if  que no es un objeto de la clase inspectoria-->
                         <f:converter converterId="inspectoriaConverter"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditProyectoLabel_sectorMS}" for="sectorMS" />

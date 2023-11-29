@@ -15,7 +15,7 @@
             <h:form>
                 <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
                     <f:facet name="left">
-                        <h:outputText>Elige un proyecto: </h:outputText>
+                        <p>Selecciona un proyecto: </p>
                         <p:selectOneMenu id="unProyectoCompleto" value="#{proyectoController.proyectoCompleto}" onchange="#{proyectoController.cargarListaProyectoCompleto()} submit()">
                             <f:selectItems value="#{proyectoController.itemsAvailableSelectMany}" />
                             <f:converter converterId="proyectoConverter" />

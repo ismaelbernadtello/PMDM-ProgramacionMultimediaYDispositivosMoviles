@@ -7,12 +7,16 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Envios de un Proyecto"></h:outputText>
+        </ui:define>
         <ui:define name="body">
             <h:form>
                 <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
                     <f:facet name="left">
-                        <p:selectOneMenu id="unProyecto" value="#{proyectoController.proyecto}" onchange="#{proyectoController.cargarListaDeEnvioDeUnProyecto()} #{proyectoController.calcularCositas()} submit()">
-                            <f:selectItems value="#{proyectoController.itemsAvailableSelectMany}" />
+                        <p>Selecciona un proyecto: </p>
+                        <p:selectOneMenu id="unProyecto" value="#{proyectoController.proyecto}" onchange="#{proyectoController.cargarListaDeEnvioDeUnProyecto()} submit()">
+                            <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}" />
                             <f:converter converterId="proyectoConverter" />
                         </p:selectOneMenu>
                     </f:facet>
@@ -23,24 +27,34 @@
             -->
             
             <h:form>
-                <p:dataTable value="#{proyectoController.listaEnvio}" var="envio" style="width: 70%;float: left"><!--en la vista los valores que tengan serán 
-                                                                                      los mismos que los del controlador-->
+                <p:dataTable value="#{proyectoController.listaEnvio}" var="envio" style="width: 70%;float: left"><!--en la vista los valores que tengan serán los mismos que los del controlador-->
                     <p:column headerText="Cód." sortBy="#{envio.envioPK.codigo}" width="50" style="text-align: center">
                         <h:outputText value="#{envio.envioPK.codigo}"/>
                     </p:column>
                     <p:column headerText="Fecha" sortBy="#{envio.envioPK.fecha}" width="50" style="text-align: center">
                         <h:outputText value="#{envio.envioPK.fecha}"/>
                     </p:column>
-                    
+                    <p:column headerText="Fecha" sortBy="#{envio.envioPK.fecha}" width="50" style="text-align: center">
+                        <h:outputText value="#{envio.envioPK.fecha}"/>
+                    </p:column>
                 </p:dataTable>
-                <p:dataTable value="#{proyectoController.suma}" var="suma" style="width: 70%;float: left"><!--en la vista los valores que tengan serán 
-                                                                                      los mismos que los del controlador-->
-                    
-                    <p:column headerText="suma" sortBy="#{suma}" width="50" style="text-align: center">
+           
+                <p:dataTable value="#{proyectoController.proyecto}" var="proyecto" style="width: 70%;float: left"><!--en la vista los valores que tengan serán los mismos que los del controlador-->
+                    <p:column headerText="Dinero concedido" width="50" style="text-align: center">
+                        <h:outputText value="#{proyecto.dineroConcedido}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:dataTable value="#{proyectoController.suma}" var="suma" style="width: 70%;float: left"><!--en la vista los valores que tengan serán los mismos que los del controlador-->
+                    <p:column headerText="Total Envios" width="50" style="text-align: center">
                         <h:outputText value="#{suma}"/>
                     </p:column>
                 </p:dataTable>
-                    
+                <p:dataTable value="#{proyectoController.mensaje}" var="mensaje" style="width: 70%;float: left"><!--en la vista los valores que tengan serán los mismos que los del controlador-->
+                    <p:column headerText="Dinero restante de enviar" width="50" style="text-align: center">
+                        <h:outputText value="#{mensaje}"/>
+                    </p:column>
+                </p:dataTable>
+                
 
             </h:form>
         </ui:define>

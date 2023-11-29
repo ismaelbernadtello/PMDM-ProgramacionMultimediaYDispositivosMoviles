@@ -903,7 +903,7 @@ public class Proyecto implements Serializable {
 
     @Override
     public String toString() {
-        return "Modelos.Proyecto[ codProyecto=" + codProyecto + " ]";
+        return getCodigo();
     }
     
 }

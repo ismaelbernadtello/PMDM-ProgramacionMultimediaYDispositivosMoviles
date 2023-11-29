@@ -29,7 +29,8 @@
                     <h:inputTextarea rows="4" cols="30" id="comentario" value="#{envioController.selected.comentario}" title="#{bundle.EditEnvioTitle_comentario}" />
                     <h:outputLabel value="#{bundle.EditEnvioLabel_proyecto}" for="proyecto" />
                     <h:selectOneMenu id="proyecto" value="#{envioController.selected.proyecto}" title="#{bundle.EditEnvioTitle_proyecto}" required="true" requiredMessage="#{bundle.EditEnvioRequiredMessage_proyecto}">
-                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/> <!-- hay que poner el itemsAvailableSelectOne a False. Luego ir al toString() del proyecto y mostrar lo que necesites en vez de el cod predeterminado  -->
+                        <f:converter converterId="proyectoConverter"/> <!-- Añadir esto para poder hacer las consultas de acción -->
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{envioController.update}" value="#{bundle.EditEnvioSaveLink}"/>

@@ -194,7 +194,7 @@ public class Inspectoria implements Serializable {
 
     @Override
     public String toString() {
-        return "Modelos.Inspectoria[ codigo=" + codigo + " ]";
+        return  getNomInspectoria();
     }
     
 }

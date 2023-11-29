@@ -42,6 +42,8 @@ public class ProyectoController implements Serializable {
     //Son para ProyectoEnvio    
     private Proyecto proyecto;
     private Double suma = 0.0;
+    private Double diferencia = 0.0;
+    private String mensaje = null;
     private List<Envio> listaEnvio;
     
     //Son para ProyectoCompleto
@@ -53,7 +55,30 @@ public class ProyectoController implements Serializable {
     private Cadsub cadsubProyectoCompleto;
     private Tecnico tecSeg;
     private Tecnico tecFor;
+    private Entidad entidadProyectoCompleto;
+    private Tipoentidad tipoEntidadProyectoCompleto;
+    
+    
+    public ProyectoController() {
+    }
 
+    public Double getDiferencia() {
+        return diferencia;
+    }
+
+    public void setDiferencia(Double diferencia) {
+        this.diferencia = diferencia;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+    
     public Tecnico getTecSeg() {
         return tecSeg;
     }
@@ -69,9 +94,6 @@ public class ProyectoController implements Serializable {
     public void setTecFor(Tecnico tecFor) {
         this.tecFor = tecFor;
     }
-    
-    private Entidad entidadProyectoCompleto;
-    private Tipoentidad tipoEntidadProyectoCompleto;
 
     public Proyecto getCurrent() {
         return current;
@@ -81,10 +103,6 @@ public class ProyectoController implements Serializable {
         this.current = current;
     }
     
-
-    public ProyectoController() {
-    }
-
     public Entidad getEntidadProyectoCompleto() {
         return entidadProyectoCompleto;
     }
@@ -390,12 +408,28 @@ public class ProyectoController implements Serializable {
     //Para envio proyecto
     public void cargarListaDeEnvioDeUnProyecto(){
         listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
+        if(proyecto != null)
+            mensaje = calcularCositas();
     }
+    
     //Para envio proyecto
-    public void calcularCositas(){
+    public String calcularCositas(){
         suma = 0.0;
+        diferencia = null;
+        
         for(Envio env: listaEnvio)
             suma += env.getCantidad();
+        
+        if(proyecto.getDineroConcedido() != null){ //Si no se le ha concedido dinero no se saca la diferencia y sera 0
+            diferencia = proyecto.getDineroConcedido() - suma;
+        }
+        
+        if (diferencia >= 0.0){
+            return diferencia.toString();
+        }
+        else{
+            return "Has gastado más de lo concedido";
+        }
     }
     
     public void cargarListaProyectoCompleto(){
