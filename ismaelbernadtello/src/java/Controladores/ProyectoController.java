@@ -407,9 +407,10 @@ public class ProyectoController implements Serializable {
     
     //Para envio proyecto
     public void cargarListaDeEnvioDeUnProyecto(){
-        listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
-        if(proyecto != null)
+        if(proyecto != null && proyecto.getNumProyecto() != null){
+            listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
             mensaje = calcularCositas();
+        }
     }
     
     //Para envio proyecto
