@@ -3,6 +3,7 @@ package Controladores;
 import Modelos.Sede;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Sederesponsable;
 import Repositorios.SedeFacade;
 
 import java.io.Serializable;
@@ -29,8 +30,25 @@ public class SedeController implements Serializable {
     private Repositorios.SedeFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private List<Sederesponsable> listasedSederesponsable;
+    
     public SedeController() {
+    }
+
+    public List<Sederesponsable> getListasedSederesponsable() {
+        return listasedSederesponsable;
+    }
+
+    public void setListasedSederesponsable(List<Sederesponsable> listasedSederesponsable) {
+        this.listasedSederesponsable = listasedSederesponsable;
+    }
+
+    public Sede getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Sede current) {
+        this.current = current;
     }
 
     public Sede getSelected() {
@@ -194,7 +212,7 @@ public class SedeController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Sede.class)
+    @FacesConverter(forClass = Sede.class, value ="sedeConverter")
     public static class SedeControllerConverter implements Converter {
 
         @Override
@@ -243,5 +261,7 @@ public class SedeController implements Serializable {
         }
         return items;
     }
-
+    public void cargarListaSedesResponsable(){
+        listasedSederesponsable = current.getSederesponsableList();
+    }
 }

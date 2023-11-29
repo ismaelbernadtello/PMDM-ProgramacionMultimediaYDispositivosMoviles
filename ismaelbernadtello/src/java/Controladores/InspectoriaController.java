@@ -3,6 +3,7 @@ package Controladores;
 import Modelos.Inspectoria;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Sede;
 import Repositorios.InspectoriaFacade;
 
 import java.io.Serializable;
@@ -29,6 +30,23 @@ public class InspectoriaController implements Serializable {
     private Repositorios.InspectoriaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<Sede> sedesPorInspectoria;
+
+    public Inspectoria getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Inspectoria current) {
+        this.current = current;
+    }
+
+    public List<Sede> getSedesPorInspectoria() {
+        return sedesPorInspectoria;
+    }
+
+    public void setSedesPorInspectoria(List<Sede> sedesPorInspectoria) {
+        this.sedesPorInspectoria = sedesPorInspectoria;
+    }
 
     public InspectoriaController() {
     }
@@ -187,14 +205,14 @@ public class InspectoriaController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
 //        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
-        return getSelectInspectoria(ejbFacade.findAll(), true);
+        return getSelectInspectoria(ejbFacade.inspectoriasOrdenadas(), false);
     }
 
     public Inspectoria getInspectoria(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Inspectoria.class)
+    @FacesConverter(forClass = Inspectoria.class, value ="inspectoriaConverter")
     public static class InspectoriaControllerConverter implements Converter {
 
         @Override
@@ -242,6 +260,12 @@ public class InspectoriaController implements Serializable {
             items[i++] = new SelectItem(x, x.getNomInspectoria());
         }
         return items;
+    }
+    public void cargarListaSedes(){
+        if(current != null)
+            sedesPorInspectoria = current.getSedeList();
+        else
+            sedesPorInspectoria = null;
     }
 
 }

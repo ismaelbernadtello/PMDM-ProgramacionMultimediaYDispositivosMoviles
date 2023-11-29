@@ -11,35 +11,48 @@
             <h:form>
                 <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
                     <f:facet name="left">
-                        <p:selectOneMenu id="unProyecto" value="#{proyectoController.proyecto}" onchange="#{proyectoController.cargarListaDeEnvioDeUnProyecto()} #{proyectoController.calcularCositas()} submit()">
-                            <f:selectItems value="#{proyectoController.itemsAvailableSelectMany}" />
-                            <f:converter converterId="proyectoConverter" />
+                        <h:outputText>Elige una Inspectoria </h:outputText>
+                        <p>Elige una Inspectoria</p>
+                        <p:selectOneMenu id="unaInspectoria" value="#{inspectoriaController.current}" onchange="#{inspectoriaController.cargarListaSedes()} submit()">
+                            <f:selectItems value="#{inspectoriaController.itemsAvailableSelectOne}" />
+                            <f:converter converterId="inspectoriaConverter" />
                         </p:selectOneMenu>
+                        
+                       
                     </f:facet>
                 </p:toolbar>
+                <br>
+                </br>
+                <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
+                    <f:facet name="left">
+                        <h:outputText>Elige una Sede </h:outputText>
+                        <p>Elige una Sede</p>
+                        <p:selectOneMenu id="unaSede" value="#{sedeController.current}" >
+                            <f:selectItems value="#{inspectoriaController.sedesPorInspectoria}" />
+                            <f:converter converterId="sedeConverter" />
+                        </p:selectOneMenu>
+                        
+                       
+                    </f:facet>
+                </p:toolbar>
+                
+                
+                    
             </h:form>
-            <!-- AR/168/19/RM 
-            BO/001/20/AM - Tiene más de un envío, para probar la suma
-            -->
             
             <h:form>
-                <p:dataTable value="#{proyectoController.listaEnvio}" var="envio" style="width: 70%;float: left"><!--en la vista los valores que tengan serán 
-                                                                                      los mismos que los del controlador-->
-                    <p:column headerText="Cód." sortBy="#{envio.envioPK.codigo}" width="50" style="text-align: center">
-                        <h:outputText value="#{envio.envioPK.codigo}"/>
-                    </p:column>
-                    <p:column headerText="Fecha" sortBy="#{envio.envioPK.fecha}" width="50" style="text-align: center">
-                        <h:outputText value="#{envio.envioPK.fecha}"/>
-                    </p:column>
-                    
-                </p:dataTable>
-                <p:dataTable value="#{proyectoController.suma}" var="suma" style="width: 70%;float: left"><!--en la vista los valores que tengan serán 
-                                                                                      los mismos que los del controlador-->
-                    
-                    <p:column headerText="suma" sortBy="#{suma}" width="50" style="text-align: center">
-                        <h:outputText value="#{suma}"/>
-                    </p:column>
-                </p:dataTable>
+                <p:panel header="Sedes de la inspectoria" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{inspectoriaController.sedesPorInspectoria}" var="sede" style="width: 70%;float: left">
+                        <p:column headerText="Cod. sede" sortBy="#{sede.codSede}" width="50" style="text-align: center">
+                            <h:outputText value="#{sede.codSede}"/>
+                        </p:column>
+                        <p:selectOneMenu id="unaSede" value="#{inspectoriaController.current}" onchange="#{inspectoriaController.cargarListaSedes()} submit()">
+                            <f:selectItems value="#{inspectoriaController.itemsAvailableSelectOne}" />
+                            <f:converter converterId="inspectoriaConverter" />
+                        </p:selectOneMenu>
+                        
+                    </p:dataTable>
+                </p:panel>
                     
 
             </h:form>

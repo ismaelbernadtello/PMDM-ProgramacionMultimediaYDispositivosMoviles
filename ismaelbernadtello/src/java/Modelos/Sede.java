@@ -183,9 +183,10 @@ public class Sede implements Serializable {
         return true;
     }
 
+    //Modificando esto nos muestra por pantalla lo que devuelve si usamos las listas que crea netbeans por defecto.
     @Override
     public String toString() {
-        return "Modelos.Sede[ codSede=" + codSede + " ]";
+        return nomSede;
     }
     
 }

@@ -6,9 +6,12 @@
 package Repositorios;
 
 import Modelos.Inspectoria;
+import Modelos.Sede;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,11 @@ public class InspectoriaFacade extends AbstractFacade<Inspectoria> {
     public InspectoriaFacade() {
         super(Inspectoria.class);
     }
-    
+    //La usamos en el selectmany y select one de proyectos para que nos salgan ordenados
+    public List<Inspectoria> inspectoriasOrdenadas() {
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Inspectoria.findAllOrdered");
+        return q.getResultList();
+    }
 }

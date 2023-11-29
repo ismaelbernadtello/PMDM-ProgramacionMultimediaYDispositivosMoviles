@@ -48,11 +48,11 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
     public List<Envio> EnvioPorProyecto(Proyecto proyecto){ //Sirve para sacar los envíos de dinero de un proyecto
         em = getEntityManager();
         Query q;
-        if (proyecto != null){ //Comrprobamos que se ha seleccionado un proyectom sino se devuelve unos envíos de un proyecto por defecto
-        q = em.createNamedQuery("Proyecto.findEnvioByProyecto").setParameter("unProyecto", proyecto.getCodigo());
+        if (proyecto != null){ //Comprobamos que se ha seleccionado un proyectom sino se devuelve unos envíos de un proyecto por defecto
+            q = em.createNamedQuery("Proyecto.findEnvioByProyecto").setParameter("unProyecto", proyecto.getCodigo());
         }
         else{
-        q = em.createNamedQuery("Proyecto.findEnvioByProyecto").setParameter("unProyecto", "ZA/626/22/PY"); 
+            q = em.createNamedQuery("Proyecto.findEnvioByProyecto").setParameter("unProyecto", "ZA/626/22/PY"); 
         }
         return q.getResultList();
     }
