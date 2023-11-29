@@ -3,6 +3,8 @@ package Controladores;
 import Modelos.Proyecto;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Envio;
+
 import Repositorios.ProyectoFacade;
 
 import java.io.Serializable;
@@ -29,6 +31,37 @@ public class ProyectoController implements Serializable {
     private Repositorios.ProyectoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private Proyecto proyecto;
+    
+    private Double suma = 0.0;
+    
+    private List<Envio> listaEnvio;
+    
+    
+    public Double getSuma() {
+        return suma;
+    }
+
+    public void setSuma(Double suma) {
+        this.suma = suma;
+    }
+    
+    public List<Envio> getListaEnvio() {
+        return listaEnvio;
+    }
+
+    public void setListaEnvio(List<Envio> listaEnvio) {
+        this.listaEnvio = listaEnvio;
+    }
+    
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
 
     public ProyectoController() {
     }
@@ -182,19 +215,18 @@ public class ProyectoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return getSelectProyecto(ejbFacade.proyectosOrdenados(), false); //el boolean sirve para elegir si es uno o muchos, si pones el true es que es solo uno y te mostraría el mensaje predifinido en el item 0
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
-        return getSelectProyecto(ejbFacade.findAll(), true);
+        return getSelectProyecto(ejbFacade.proyectosOrdenados(), false);
     }
 
     public Proyecto getProyecto(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Proyecto.class)
+    @FacesConverter(forClass = Proyecto.class, value="proyectoConverter")
     public static class ProyectoControllerConverter implements Converter {
 
         @Override
@@ -234,14 +266,34 @@ public class ProyectoController implements Serializable {
 
     }
     
-    public static SelectItem[] getSelectProyecto(List<Proyecto> entities, boolean selectOne) {
-        SelectItem[] items = new SelectItem[entities.size()];
+    public static SelectItem[] getSelectProyecto(List<Proyecto> entities, boolean selectOne) { // le pasamos la lista de Cad
+        int size = selectOne ? entities.size() + 1 : entities.size();
+        SelectItem[] items = new SelectItem[size];
         int i = 0;
-
-        for (Proyecto x : entities) {
-            items[i++] = new SelectItem(x, x.getTitulo());
+        if (selectOne) {
+            items[0] = new SelectItem("0", "Elige un proyecto");
+            i++;
+        }//nombre del objeto : y la lista, todos los objetos del mundo mundial son de la superclase Object
+        for (Proyecto x : entities) { // lee objetos de la clase cad
+            items[i++] = new SelectItem(x, x.getCodigo()); // le ponemos el objeto cad (x) y el nombre del 
         }
         return items;
     }
-
+    
+//    public void cargarListaDeEnvioDeUnProyecto(){
+//        listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
+//    }
+    
+    public void cargarListaDeEnvioDeUnProyecto(){
+        listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
+    }
+    
+    public void calcularCositas(){
+        suma = 0.0;
+        for(Envio env: listaEnvio)
+            suma += env.getCantidad();
+    }
+        
+        
+        
 }

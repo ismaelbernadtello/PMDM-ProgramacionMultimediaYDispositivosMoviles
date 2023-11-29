@@ -95,7 +95,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyecto.findByInformeDonante", query = "SELECT p FROM Proyecto p WHERE p.informeDonante = :informeDonante")
     , @NamedQuery(name = "Proyecto.findByCategoria", query = "SELECT p FROM Proyecto p WHERE p.categoria = :categoria")
     , @NamedQuery(name = "Proyecto.findBySubcategoria", query = "SELECT p FROM Proyecto p WHERE p.subcategoria = :subcategoria")
-    , @NamedQuery(name = "Proyecto.findByExtinguido", query = "SELECT p FROM Proyecto p WHERE p.extinguido = :extinguido")})
+    , @NamedQuery(name = "Proyecto.findByExtinguido", query = "SELECT p FROM Proyecto p WHERE p.extinguido = :extinguido")
+        
+     //La usamos en el selectmany y select one de proyectos para que nos salgan ordenados
+    , @NamedQuery(name = "Proyecto.findAllOrdered", query = "SELECT p FROM Proyecto p ORDER BY p.pais, p.anyo, p.codigo")
+        
+    //Sirve para sacar los envíos de dinero de un proyecto
+    , @NamedQuery(name = "Proyecto.findEnvioByProyecto", query = "SELECT e FROM Envio e WHERE e.envioPK.codigo = :unProyecto ORDER BY e.cantidad DESC")}) 
+
 public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
