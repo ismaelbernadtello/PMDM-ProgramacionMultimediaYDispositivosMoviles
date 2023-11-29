@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Proyecto Completo"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+                
+            <h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
+                    <f:facet name="left">
+                        <h:outputText>Elige un proyecto: </h:outputText>
+                        <p:selectOneMenu id="unProyectoCompleto" value="#{proyectoController.proyectoCompleto}" onchange="#{proyectoController.cargarListaProyectoCompleto()} submit()">
+                            <f:selectItems value="#{proyectoController.itemsAvailableSelectMany}" />
+                            <f:converter converterId="proyectoConverter" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:toolbar>
+            </h:form>
+            
+            <h:form>
+                <p:panel header="Inspectoria del Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.inspectoriaProyectoCompleto}" var="inspectoria" style="width: 70%;float: left">
+                        <p:column headerText="Cód." sortBy="#{inspectoria.codigo}" width="50" style="text-align: center">
+                            <h:outputText value="#{inspectoria.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Socio Local" sortBy="#{inspectoria.socioLocal}" width="50" style="text-align: center">
+                            <h:outputText value="#{inspectoria.socioLocal}"/>
+                        </p:column>
+                        <p:column headerText="Codigo Inspectoria" sortBy="#{inspectoria.codInspectoria}" width="50" style="text-align: center">
+                            <h:outputText value="#{inspectoria.codInspectoria}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Inspectoria" sortBy="#{inspectoria.nomInspectoria}" width="50" style="text-align: center">
+                            <h:outputText value="#{inspectoria.nomInspectoria}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

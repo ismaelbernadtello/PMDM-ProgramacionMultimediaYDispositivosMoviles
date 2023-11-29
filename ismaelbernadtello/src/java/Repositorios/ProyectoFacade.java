@@ -6,6 +6,7 @@
 package Repositorios;
 
 import Modelos.Envio;
+import Modelos.Inspectoria;
 import Modelos.Proyecto;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -32,6 +33,15 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
         super(Proyecto.class);
     }
     
+     //La usamos en el selectmany y select one de proyectos para que nos salgan ordenados
+    public List<Proyecto> proyectosOrdenados() {
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Proyecto.findAllOrdered");
+        return q.getResultList();
+    }
+    
+    //Para Envio Proyecto
     public List<Envio> EnvioPorProyecto(Proyecto proyecto){ //Sirve para sacar los envíos de dinero de un proyecto
         em = getEntityManager();
         Query q;
@@ -43,12 +53,29 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
         }
         return q.getResultList();
     }
+
     
-    public List<Proyecto> proyectosOrdenados() { //La usamos en el selectmany y select one de proyectos para que nos salgan ordenados
+    public Inspectoria inspectoriaProyectoCompleto(Proyecto proyectoCompleto) {
         em = getEntityManager();
         Query q;
-        q = em.createNamedQuery("Proyecto.findAllOrdered");
-        return q.getResultList();
+
+        if (proyectoCompleto != null && proyectoCompleto.getInspectoria() != null) {
+            q = em.createNamedQuery("Proyecto.findByInspectoriaProyectoCompleto")
+                    .setParameter("unProyectoCompleto",proyectoCompleto.getInspectoria().getCodInspectoria())
+                    .setMaxResults(1);
+        } 
+        else {
+            return null;
+        }
+
+        // Ejecutar la consulta y obtener el resultado
+        Inspectoria resultado = (Inspectoria) q.getSingleResult();  // Asumiendo que el resultado es de tipo Inspectoria
+
+        // Devolver el resultado
+        return resultado;
     }
+    
+
+    
     
 }

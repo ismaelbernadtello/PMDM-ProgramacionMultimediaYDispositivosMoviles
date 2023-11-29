@@ -12,7 +12,8 @@
             <h:form>
                 <p:growl id="messages" showDetail="true"/>
                 <span class="pi pi-check"></span>
-                <h5 class="mt-0" style=" font-size:20px;">Salesianos Menú</h5>
+                <h5 class="mt-0" style=" font-size:20px; text-align: center">Salesianos Menú</h5>
+                <center>
                 <p:tieredMenu>
                     <p:submenu label="Cad" icon="pi pi-apple">  
                         <p:menuitem outcome="/Vistas/cad/List" value="Listado de CAD" icon="pi pi-fw pi-bookmark"/>
@@ -68,6 +69,7 @@
                         <p:menuitem  outcome="/Vistas/proyecto/Edit" value="Editar Proyectos" icon="pi pi-fw pi-bookmark"/>
                         <p:menuitem  outcome="/Vistas/proyecto/View" value="Ver Proyectos" icon="pi pi-fw pi-bookmark"/>
                         <p:menuitem  outcome="/Vistas/proyecto/ProyectoEnvio" value="Envíos por Proyecto" icon="pi pi-fw pi-bookmark"/>
+                        <p:menuitem  outcome="/Vistas/proyecto/ProyectoCompleto" value="Info Proyecto Completo" icon="pi pi-fw pi-bookmark"/>
                     </p:submenu>
                     <p:submenu label="Responsable" icon="pi pi-apple">
                         <p:menuitem  outcome="/Vistas/responsable/List" value="Listado de Responsables" icon="pi pi-fw pi-bookmark"/>
@@ -106,6 +108,7 @@
                         <p:menuitem  outcome="/Vistas/tecnico/View" value="View Tecnicos" icon="pi pi-fw pi-bookmark"/>
                     </p:submenu>
                 </p:tieredMenu>
+                </center>
             </h:form>
         </div>
     </h:body>

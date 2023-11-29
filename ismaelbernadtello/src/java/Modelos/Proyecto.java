@@ -101,7 +101,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyecto.findAllOrdered", query = "SELECT p FROM Proyecto p ORDER BY p.pais, p.anyo, p.codigo")
         
     //Sirve para sacar los envíos de dinero de un proyecto
-    , @NamedQuery(name = "Proyecto.findEnvioByProyecto", query = "SELECT e FROM Envio e WHERE e.envioPK.codigo = :unProyecto ORDER BY e.cantidad DESC")}) 
+    , @NamedQuery(name = "Proyecto.findEnvioByProyecto", query = "SELECT e FROM Envio e WHERE e.envioPK.codigo = :unProyecto ORDER BY e.cantidad DESC")
+
+    //Sirve para sacar la inspectoria del proyecto
+    , @NamedQuery(name = "Proyecto.findByInspectoriaProyectoCompleto", query = "SELECT i FROM Inspectoria i WHERE i.codInspectoria = :unProyectoCompleto")}) 
 
 public class Proyecto implements Serializable {
 

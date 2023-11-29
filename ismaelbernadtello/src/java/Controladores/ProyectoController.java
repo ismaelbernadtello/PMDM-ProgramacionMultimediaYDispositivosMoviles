@@ -4,6 +4,7 @@ import Modelos.Proyecto;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
 import Modelos.Envio;
+import Modelos.Inspectoria;
 
 import Repositorios.ProyectoFacade;
 
@@ -32,11 +33,37 @@ public class ProyectoController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     
+    //Son para ProyectoEnvio    
     private Proyecto proyecto;
-    
     private Double suma = 0.0;
-    
     private List<Envio> listaEnvio;
+    
+    //Son para ProyectoCompleto
+    private Proyecto proyectoCompleto;
+    private Inspectoria inspectoriaProyectoCompleto;
+    
+    
+
+    public ProyectoController() {
+    }
+
+    public Proyecto getProyectoCompleto() {
+        return proyectoCompleto;
+    }
+
+    public void setProyectoCompleto(Proyecto proyectoCompleto) {
+        this.proyectoCompleto = proyectoCompleto;
+    }
+
+    public Inspectoria getInspectoriaProyectoCompleto() {
+        return inspectoriaProyectoCompleto;
+    }
+
+    public void setInspectoriaProyectoCompleto(Inspectoria inspectoriaProyectoCompleto) {
+        this.inspectoriaProyectoCompleto = inspectoriaProyectoCompleto;
+    }
+    
+    
     
     
     public Double getSuma() {
@@ -46,7 +73,7 @@ public class ProyectoController implements Serializable {
     public void setSuma(Double suma) {
         this.suma = suma;
     }
-    
+
     public List<Envio> getListaEnvio() {
         return listaEnvio;
     }
@@ -54,7 +81,7 @@ public class ProyectoController implements Serializable {
     public void setListaEnvio(List<Envio> listaEnvio) {
         this.listaEnvio = listaEnvio;
     }
-    
+
     public Proyecto getProyecto() {
         return proyecto;
     }
@@ -62,10 +89,6 @@ public class ProyectoController implements Serializable {
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
-
-    public ProyectoController() {
-    }
-
     public Proyecto getSelected() {
         if (current == null) {
             current = new Proyecto();
@@ -284,15 +307,22 @@ public class ProyectoController implements Serializable {
 //        listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
 //    }
     
+    //Para envio proyecto
     public void cargarListaDeEnvioDeUnProyecto(){
         listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
     }
-    
+    //Para envio proyecto
     public void calcularCositas(){
         suma = 0.0;
         for(Envio env: listaEnvio)
             suma += env.getCantidad();
     }
+    
+    public void cargarListaProyectoCompleto(){
+        inspectoriaProyectoCompleto = ejbFacade.inspectoriaProyectoCompleto(proyectoCompleto);
+        
+    }
+    
         
         
         
