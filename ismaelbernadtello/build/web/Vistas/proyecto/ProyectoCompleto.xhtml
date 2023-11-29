@@ -96,6 +96,35 @@
                     </p:dataTable>
                 </p:panel>
                 
+                <p:panel header="Entidad Del proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.entidadProyectoCompleto}" var="entidad" style="width: 70%;float: left">
+                        <p:column headerText="Codigo Entidad" sortBy="#{entidad.codigo}" width="50" style="text-align: center">
+                            <h:outputText value="#{entidad.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Tipo Entidad" sortBy="#{entidad.tipoEntidad}" width="50" style="text-align: center">
+                            <h:outputText value="#{entidad.tipoEntidad}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Entidad" sortBy="#{entidad.nomEntidad}" width="50" style="text-align: center">
+                            <h:outputText value="#{entidad.nomEntidad}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                
+                <p:panel header="Tipo de Entidad Del proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.tipoEntidadProyectoCompleto}" var="tipoentidad" style="width: 70%;float: left">
+                        <p:column headerText="Codigo tipo de entidad" sortBy="#{tipoentidad.codTipo}" width="50" style="text-align: center">
+                            <h:outputText value="#{tipoentidad.codTipo}"/>
+                        </p:column>
+                        <p:column headerText="Codigo tipo de entidad" sortBy="#{tipoentidad.nomTipo}" width="50" style="text-align: center">
+                            <h:outputText value="#{tipoentidad.nomTipo}"/>
+                        </p:column>
+                        <p:column headerText="Codigo tipo de entidad" sortBy="#{tipoentidad.tipoOrganismo}" width="50" style="text-align: center">
+                            <h:outputText value="#{tipoentidad.tipoOrganismo}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
                 
             </h:form>
         </ui:define>

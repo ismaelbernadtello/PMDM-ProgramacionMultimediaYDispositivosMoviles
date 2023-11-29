@@ -105,7 +105,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
     //Sirve para sacar la inspectoria del proyecto
     , @NamedQuery(name = "Proyecto.findByInspectoriaProyectoCompleto", query = "SELECT i FROM Inspectoria i WHERE i.codInspectoria = :unProyectoCompleto")
-    , @NamedQuery(name = "Proyecto.findBySedeProyectoCompleto", query = "SELECT s FROM Sede s WHERE s.codSede = :unProyectoCompleto")}) 
+    //Sirve para sacar la sede del proyecto
+    , @NamedQuery(name = "Proyecto.findBySedeProyectoCompleto", query = "SELECT s FROM Sede s WHERE s.codSede = :unProyectoCompleto")
+    //Sirve para sacar la Entidad del proyecto
+    , @NamedQuery(name = "Proyecto.findByEntidadProyectoCompleto", query = "SELECT e FROM Entidad e WHERE e.codigo = :unProyectoCompleto")
+    //Sirve para sacar el Tipo de Entidad del proyecto
+    , @NamedQuery(name = "Proyecto.findByTipoEntidadProyectoCompleto", query = "SELECT t FROM Tipoentidad t WHERE t.codTipo = :unProyectoCompleto")
+}) 
 
 public class Proyecto implements Serializable {
 

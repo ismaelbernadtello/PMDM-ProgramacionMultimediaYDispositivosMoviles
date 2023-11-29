@@ -3,9 +3,12 @@ package Controladores;
 import Modelos.Proyecto;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Cadsub;
 import Modelos.Crs;
+import Modelos.Entidad;
 import Modelos.Envio;
 import Modelos.Inspectoria;
+import Modelos.Tipoentidad;
 import Modelos.Sede;
 
 import Repositorios.ProyectoFacade;
@@ -46,11 +49,32 @@ public class ProyectoController implements Serializable {
     private Sede sedeProyectoCompleto;
     private List<Envio> listaDeEnvioProyectoCompleto;
     private List<Crs> listaCrsProyectoCompleto;
+    private Cadsub cadsubProyectoCompleto;
+    
+    private Entidad entidadProyectoCompleto;
+    private Tipoentidad tipoEntidadProyectoCompleto;
     
 
     public ProyectoController() {
     }
 
+    public Entidad getEntidadProyectoCompleto() {
+        return entidadProyectoCompleto;
+    }
+
+    public void setEntidadProyectoCompleto(Entidad entidadProyectoCompleto) {
+        this.entidadProyectoCompleto = entidadProyectoCompleto;
+    }
+
+    public Tipoentidad getTipoEntidadProyectoCompleto() {
+        return tipoEntidadProyectoCompleto;
+    }
+
+    public void setTipoEntidadProyectoCompleto(Tipoentidad tipoEntidadProyectoCompleto) {
+        this.tipoEntidadProyectoCompleto = tipoEntidadProyectoCompleto;
+    }
+
+    
     public List<Crs> getListaCrsProyectoCompleto() {
         return listaCrsProyectoCompleto;
     }
@@ -357,10 +381,16 @@ public class ProyectoController implements Serializable {
         //No necesitamos ir a consultar los CRS del proyecto porque el proyecto ya tiene una lista con sus CRS
         if(proyectoCompleto != null){
             listaCrsProyectoCompleto =  proyectoCompleto.getCrsList();
+//            cadsubProyectoCompleto = ejbFacade.cadsubProyectoCompleto(listaCrsProyectoCompleto.indexOf(0));
         }
         else{
             listaCrsProyectoCompleto = null;
         }
+        
+        entidadProyectoCompleto = ejbFacade.entidadProyectoCompleto(proyectoCompleto);
+        tipoEntidadProyectoCompleto = ejbFacade.tipoEntidadProyectoCompleto(proyectoCompleto);
+        
+        
         
     }
     

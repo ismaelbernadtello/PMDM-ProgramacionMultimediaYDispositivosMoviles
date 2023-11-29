@@ -5,10 +5,12 @@
  */
 package Repositorios;
 
+import Modelos.Entidad;
 import Modelos.Envio;
 import Modelos.Inspectoria;
 import Modelos.Proyecto;
 import Modelos.Sede;
+import Modelos.Tipoentidad;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -93,6 +95,48 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
 
         // Ejecutar la consulta y obtener el resultado
         Sede resultado = (Sede) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
+
+        // Devolver el resultado
+        return resultado;
+    }
+
+    public Entidad entidadProyectoCompleto(Proyecto proyectoCompleto) {
+        em = getEntityManager();
+        Query q;
+        
+        //Compruebo que el proyecto haya sido seleccionado y que ese proyecto tenga una sede asignada
+        if (proyectoCompleto != null && proyectoCompleto.getEntidad() != null) {
+            q = em.createNamedQuery("Proyecto.findByEntidadProyectoCompleto")
+                    .setParameter("unProyectoCompleto",proyectoCompleto.getEntidad().getCodigo())
+                    .setMaxResults(1);
+        } 
+        else {
+            return null; //Si no se ha seleccionado nada o no tiene sede asignada no saldra nada
+        }
+
+        // Ejecutar la consulta y obtener el resultado
+        Entidad resultado = (Entidad) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
+
+        // Devolver el resultado
+        return resultado;
+    }
+
+    public Tipoentidad tipoEntidadProyectoCompleto(Proyecto proyectoCompleto) {
+        em = getEntityManager();
+        Query q;
+        
+        //Compruebo que el proyecto haya sido seleccionado y que ese proyecto tenga una sede asignada
+        if (proyectoCompleto != null && proyectoCompleto.getTipoEntidad() != null) {
+            q = em.createNamedQuery("Proyecto.findByTipoEntidadProyectoCompleto")
+                    .setParameter("unProyectoCompleto",proyectoCompleto.getTipoEntidad().getCodTipo())
+                    .setMaxResults(1);
+        } 
+        else {
+            return null; //Si no se ha seleccionado nada o no tiene sede asignada no saldra nada
+        }
+
+        // Ejecutar la consulta y obtener el resultado
+        Tipoentidad resultado = (Tipoentidad) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
 
         // Devolver el resultado
         return resultado;
