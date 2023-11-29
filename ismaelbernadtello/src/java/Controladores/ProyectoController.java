@@ -3,8 +3,10 @@ package Controladores;
 import Modelos.Proyecto;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Modelos.Crs;
 import Modelos.Envio;
 import Modelos.Inspectoria;
+import Modelos.Sede;
 
 import Repositorios.ProyectoFacade;
 
@@ -41,12 +43,39 @@ public class ProyectoController implements Serializable {
     //Son para ProyectoCompleto
     private Proyecto proyectoCompleto;
     private Inspectoria inspectoriaProyectoCompleto;
-    
+    private Sede sedeProyectoCompleto;
+    private List<Envio> listaDeEnvioProyectoCompleto;
+    private List<Crs> listaCrsProyectoCompleto;
     
 
     public ProyectoController() {
     }
 
+    public List<Crs> getListaCrsProyectoCompleto() {
+        return listaCrsProyectoCompleto;
+    }
+
+    public void setListaCrsProyectoCompleto(List<Crs> listaCrsProyectoCompleto) {
+        this.listaCrsProyectoCompleto = listaCrsProyectoCompleto;
+    }
+
+    
+    public List<Envio> getListaDeEnvioProyectoCompleto() {
+        return listaDeEnvioProyectoCompleto;
+    }
+
+    public void setListaDeEnvioProyectoCompleto(List<Envio> listaDeEnvioProyectoCompleto) {
+        this.listaDeEnvioProyectoCompleto = listaDeEnvioProyectoCompleto;
+    }
+
+    public Sede getSedeProyectoCompleto() {
+        return sedeProyectoCompleto;
+    }
+
+    public void setSedeProyectoCompleto(Sede sedeProyectoCompleto) {
+        this.sedeProyectoCompleto = sedeProyectoCompleto;
+    }
+    
     public Proyecto getProyectoCompleto() {
         return proyectoCompleto;
     }
@@ -320,6 +349,18 @@ public class ProyectoController implements Serializable {
     
     public void cargarListaProyectoCompleto(){
         inspectoriaProyectoCompleto = ejbFacade.inspectoriaProyectoCompleto(proyectoCompleto);
+        sedeProyectoCompleto = ejbFacade.sedeProyectoCompleto(proyectoCompleto);
+        
+        //Reutilizamos la funcion del facade que hemos creado previamente para recuperar los envios de un proyecto
+        listaDeEnvioProyectoCompleto = ejbFacade.EnvioPorProyecto(proyectoCompleto); 
+        
+        //No necesitamos ir a consultar los CRS del proyecto porque el proyecto ya tiene una lista con sus CRS
+        if(proyectoCompleto != null){
+            listaCrsProyectoCompleto =  proyectoCompleto.getCrsList();
+        }
+        else{
+            listaCrsProyectoCompleto = null;
+        }
         
     }
     

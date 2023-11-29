@@ -23,21 +23,75 @@
                     </f:facet>
                 </p:toolbar>
             </h:form>
-            
+            <!--PARA PROBAR CON UN PROYECTO QUE TIENE TODO/CASI TODOS LOS CAMPOS: CM/597/20/AG-->
             <h:form>
                 <p:panel header="Inspectoria del Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
                     <p:dataTable value="#{proyectoController.inspectoriaProyectoCompleto}" var="inspectoria" style="width: 70%;float: left">
-                        <p:column headerText="Cód." sortBy="#{inspectoria.codigo}" width="50" style="text-align: center">
+                        <p:column headerText="Cód."  width="50" style="text-align: center">
                             <h:outputText value="#{inspectoria.codigo}"/>
                         </p:column>
-                        <p:column headerText="Socio Local" sortBy="#{inspectoria.socioLocal}" width="50" style="text-align: center">
+                        <p:column headerText="Socio Local"  width="50" style="text-align: center">
                             <h:outputText value="#{inspectoria.socioLocal}"/>
                         </p:column>
-                        <p:column headerText="Codigo Inspectoria" sortBy="#{inspectoria.codInspectoria}" width="50" style="text-align: center">
+                        <p:column headerText="Codigo Inspectoria"  width="50" style="text-align: center">
                             <h:outputText value="#{inspectoria.codInspectoria}"/>
                         </p:column>
-                        <p:column headerText="Nombre Inspectoria" sortBy="#{inspectoria.nomInspectoria}" width="50" style="text-align: center">
+                        <p:column headerText="Nombre Inspectoria"  width="50" style="text-align: center">
                             <h:outputText value="#{inspectoria.nomInspectoria}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel header="Sedes del Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.sedeProyectoCompleto}" var="sede" style="width: 70%;float: left">
+                        <p:column headerText="Cod. sede" width="50" style="text-align: center">
+                            <h:outputText value="#{sede.codSede}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Sede"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.nomSede}"/>
+                        </p:column>
+                        <p:column headerText="Direccion"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.direccion}"/>
+                        </p:column>
+                        <p:column headerText="Ciudad"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.ciudad}"/>
+                        </p:column>
+                        <p:column headerText="Telefono"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.telefono}"/>
+                        </p:column>
+                        <p:column headerText="Pais"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.pais}"/>
+                        </p:column>
+                        <p:column headerText="Socio Local"  width="50" style="text-align: center">
+                            <h:outputText value="#{sede.socioLocal}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel header="Envios del Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.listaDeEnvioProyectoCompleto}" var="envio" style="width: 70%;float: left">
+                        <p:column headerText="Cod. sede" sortBy="#{envio.cantidad}" width="50" style="text-align: center">
+                            <h:outputText value="#{envio.cantidad}"/>
+                        </p:column>
+                        <p:column headerText="Cód." sortBy="#{envio.envioPK.codigo}" width="50" style="text-align: center">
+                            <h:outputText value="#{envio.envioPK.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Fecha" sortBy="#{envio.envioPK.fecha}" width="50" style="text-align: center">
+                            <h:outputText value="#{envio.envioPK.fecha}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel header="Crs Del proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.listaCrsProyectoCompleto}" var="crs" style="width: 70%;float: left">
+                        <p:column headerText="Codigo Crs" sortBy="#{crs.codCrs}" width="50" style="text-align: center">
+                            <h:outputText value="#{crs.codCrs}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Crs" sortBy="#{crs.nomCrs}" width="50" style="text-align: center">
+                            <h:outputText value="#{crs.nomCrs}"/>
+                        </p:column>
+                        <p:column headerText="Informacion Crs" sortBy="#{crs.informacionesESP}" width="50" style="text-align: center">
+                            <h:outputText value="#{crs.informacionesESP}"/>
                         </p:column>
                     </p:dataTable>
                 </p:panel>

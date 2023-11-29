@@ -104,7 +104,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyecto.findEnvioByProyecto", query = "SELECT e FROM Envio e WHERE e.envioPK.codigo = :unProyecto ORDER BY e.cantidad DESC")
 
     //Sirve para sacar la inspectoria del proyecto
-    , @NamedQuery(name = "Proyecto.findByInspectoriaProyectoCompleto", query = "SELECT i FROM Inspectoria i WHERE i.codInspectoria = :unProyectoCompleto")}) 
+    , @NamedQuery(name = "Proyecto.findByInspectoriaProyectoCompleto", query = "SELECT i FROM Inspectoria i WHERE i.codInspectoria = :unProyectoCompleto")
+    , @NamedQuery(name = "Proyecto.findBySedeProyectoCompleto", query = "SELECT s FROM Sede s WHERE s.codSede = :unProyectoCompleto")}) 
 
 public class Proyecto implements Serializable {
 
