@@ -10,6 +10,7 @@ import Modelos.Envio;
 import Modelos.Inspectoria;
 import Modelos.Proyecto;
 import Modelos.Sede;
+import Modelos.Tecnico;
 import Modelos.Tipoentidad;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -137,6 +138,47 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
 
         // Ejecutar la consulta y obtener el resultado
         Tipoentidad resultado = (Tipoentidad) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
+
+        // Devolver el resultado
+        return resultado;
+    }
+    public Tecnico tecnicoDeProyectoSeguimientoCompleto(Proyecto proyectoCompleto) {
+        em = getEntityManager();
+        Query q;
+        
+        //Compruebo que el proyecto haya sido seleccionado y que ese proyecto tenga una sede asignada
+        if (proyectoCompleto != null && proyectoCompleto.getTecSeg()!= null) {
+            q = em.createNamedQuery("Proyecto.findTecnico")
+                    .setParameter("cod_tecnico",proyectoCompleto.getTecSeg().getCodTecnico())
+                    .setMaxResults(1);
+        } 
+        else {
+            return null; //Si no se ha seleccionado nada o no tiene sede asignada no saldra nada
+        }
+
+        // Ejecutar la consulta y obtener el resultado
+        Tecnico resultado = (Tecnico) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
+
+        // Devolver el resultado
+        return resultado;
+    }
+    
+    public Tecnico tecnicoDeProyectoFormacionCompleto(Proyecto proyectoCompleto) {
+        em = getEntityManager();
+        Query q;
+        
+        //Compruebo que el proyecto haya sido seleccionado y que ese proyecto tenga una sede asignada
+        if (proyectoCompleto != null && proyectoCompleto.getTecFor()!= null) {
+            q = em.createNamedQuery("Proyecto.findTecnico")
+                    .setParameter("cod_tecnico",proyectoCompleto.getTecFor().getCodTecnico())
+                    .setMaxResults(1);
+        } 
+        else {
+            return null; //Si no se ha seleccionado nada o no tiene sede asignada no saldra nada
+        }
+
+        // Ejecutar la consulta y obtener el resultado
+        Tecnico resultado = (Tecnico) q.getSingleResult();  // Devolvemos 1 solo resultado por el tipo de relacion
 
         // Devolver el resultado
         return resultado;

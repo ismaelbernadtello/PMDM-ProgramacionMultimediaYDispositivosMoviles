@@ -186,7 +186,7 @@ public class Sede implements Serializable {
     //Modificando esto nos muestra por pantalla lo que devuelve si usamos las listas que crea netbeans por defecto.
     @Override
     public String toString() {
-        return nomSede;
+        return codSede;
     }
     
 }

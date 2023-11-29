@@ -28,7 +28,7 @@ public class SederesponsableController implements Serializable {
     private Repositorios.SederesponsableFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+   
     public SederesponsableController() {
     }
 

@@ -20,6 +20,14 @@
                             <f:selectItems value="#{proyectoController.itemsAvailableSelectMany}" />
                             <f:converter converterId="proyectoConverter" />
                         </p:selectOneMenu>
+                        <p:column style="width: 100px">
+                            <h:commandLink action="#{proyectoController.prepareView()}" value="Ver"/>
+                            <h:outputText value="  "/>
+                            <h:commandLink action="#{proyectoController.prepareEdit()}" value="Editar"/>
+                            <h:outputText value="  "/>
+                            <h:commandLink action="#{proyectoController.destroyAndView()}" value="Borrar"/>
+                            <h:outputText value="  "/>
+                        </p:column>
                     </f:facet>
                 </p:toolbar>
             </h:form>
@@ -39,6 +47,7 @@
                         <p:column headerText="Nombre Inspectoria"  width="50" style="text-align: center">
                             <h:outputText value="#{inspectoria.nomInspectoria}"/>
                         </p:column>
+                         
                     </p:dataTable>
                 </p:panel>
                 
@@ -125,6 +134,26 @@
                     </p:dataTable>
                 </p:panel>
                 
+                <p:panel header="Tecnico de Formación del Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.tecFor}" var="tecnico" style="width: 70%;float: left">
+                        <p:column headerText="Codigo tec" width="50" style="text-align: center">
+                            <h:outputText value="#{tecnico.codTecnico}"/>
+                        </p:column>
+                        <p:column headerText="Nombre del técnico" width="50" style="text-align: center">
+                            <h:outputText value="#{tecnico.nomTecnico}"/>
+                        </p:column>
+                   </p:dataTable>
+                </p:panel>
+                <p:panel header="Tecnico de Seguimiento del  Proyecto" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{proyectoController.tecSeg}" var="tecnico" style="width: 70%;float: left">
+                        <p:column headerText="Codigo tec" width="50" style="text-align: center">
+                            <h:outputText value="#{tecnico.codTecnico}"/>
+                        </p:column>
+                        <p:column headerText="Nombre del técnico" width="50" style="text-align: center">
+                            <h:outputText value="#{tecnico.nomTecnico}"/>
+                        </p:column>
+                   </p:dataTable>
+                </p:panel>
                 
             </h:form>
         </ui:define>

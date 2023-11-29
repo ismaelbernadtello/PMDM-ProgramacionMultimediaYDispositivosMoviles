@@ -11,50 +11,49 @@
             <h:form>
                 <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
                     <f:facet name="left">
-                        <h:outputText>Elige una Inspectoria </h:outputText>
                         <p>Elige una Inspectoria</p>
                         <p:selectOneMenu id="unaInspectoria" value="#{inspectoriaController.current}" onchange="#{inspectoriaController.cargarListaSedes()} submit()">
                             <f:selectItems value="#{inspectoriaController.itemsAvailableSelectOne}" />
                             <f:converter converterId="inspectoriaConverter" />
                         </p:selectOneMenu>
-                        
-                       
                     </f:facet>
                 </p:toolbar>
                 <br>
                 </br>
                 <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
                     <f:facet name="left">
-                        <h:outputText>Elige una Sede </h:outputText>
                         <p>Elige una Sede</p>
-                        <p:selectOneMenu id="unaSede" value="#{sedeController.current}" >
-                            <f:selectItems value="#{inspectoriaController.sedesPorInspectoria}" />
+                        <p:selectOneMenu id="unaSede" value="#{sedeController.current}" onchange="#{sedeController.cargarListaSedesResponsable()} submit()">
+                            <f:selectItems value="#{inspectoriaController.sedesAvailableSelectOne}" />
                             <f:converter converterId="sedeConverter" />
                         </p:selectOneMenu>
-                        
-                       
                     </f:facet>
                 </p:toolbar>
-                
-                
-                    
             </h:form>
             
             <h:form>
-                <p:panel header="Sedes de la inspectoria" style="width: 70%; float: left; margin-bottom: 10px;">
-                    <p:dataTable value="#{inspectoriaController.sedesPorInspectoria}" var="sede" style="width: 70%;float: left">
-                        <p:column headerText="Cod. sede" sortBy="#{sede.codSede}" width="50" style="text-align: center">
-                            <h:outputText value="#{sede.codSede}"/>
+                <p:panel header="Datos de la tabla intermedia con atributos propios de la relacion" style="width: 70%; float: left; margin-bottom: 10px;">
+                    <p:dataTable value="#{sedeController.listasedSederesponsable}" var="sedeResponsable" style="width: 70%;float: left">
+                        <p:column headerText="Cod. responsable" sortBy="#{sedeResponsable.sederesponsablePK.codResponsable}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.sederesponsablePK.codResponsable}"/>
                         </p:column>
-                        <p:selectOneMenu id="unaSede" value="#{inspectoriaController.current}" onchange="#{inspectoriaController.cargarListaSedes()} submit()">
-                            <f:selectItems value="#{inspectoriaController.itemsAvailableSelectOne}" />
-                            <f:converter converterId="inspectoriaConverter" />
-                        </p:selectOneMenu>
-                        
+                        <p:column headerText="Cod. sede" sortBy="#{sedeResponsable.sederesponsablePK.codSede}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.sederesponsablePK.codSede}"/>
+                        </p:column>
+                        <p:column headerText="Fecha" sortBy="#{sedeResponsable.sederesponsablePK.fechaInicio}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.sederesponsablePK.fechaInicio}"/>
+                        </p:column>
+                        <p:column headerText="Nom. Responsable" sortBy="#{sedeResponsable.responsable.nomResponsable}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.responsable.nomResponsable}"/>
+                        </p:column>
+                        <p:column headerText="Nom. Responsable" sortBy="#{sedeResponsable.responsable.tipoMisionero}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.responsable.tipoMisionero}"/>
+                        </p:column>
+                        <p:column headerText="Tratamiento" sortBy="#{sedeResponsable.responsable.tratamiento}" width="50" style="text-align: center">
+                            <h:outputText value="#{sedeResponsable.responsable.tratamiento}"/>
+                        </p:column>
                     </p:dataTable>
                 </p:panel>
-                    
-
             </h:form>
         </ui:define>
     </ui:composition>

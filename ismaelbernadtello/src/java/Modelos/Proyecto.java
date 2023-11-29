@@ -111,6 +111,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyecto.findByEntidadProyectoCompleto", query = "SELECT e FROM Entidad e WHERE e.codigo = :unProyectoCompleto")
     //Sirve para sacar el Tipo de Entidad del proyecto
     , @NamedQuery(name = "Proyecto.findByTipoEntidadProyectoCompleto", query = "SELECT t FROM Tipoentidad t WHERE t.codTipo = :unProyectoCompleto")
+    //Sirve para sacar el Tecnico de Seguimiento o formacion
+    , @NamedQuery(name = "Proyecto.findTecnico", query = "SELECT t FROM Tecnico t WHERE t.codTecnico = :cod_tecnico")
 }) 
 
 public class Proyecto implements Serializable {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="13">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="15">
         <file>
             <url>src/java/Repositorios/ProyectoFacade.java</url>
             <bookmark id="2">
@@ -26,17 +26,30 @@
             </bookmark>
             <bookmark id="10">
                 <name/>
-                <line>214</line>
+                <line>219</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>254</line>
+                <line>259</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>267</line>
+                <line>286</line>
+                <key/>
+            </bookmark>
+            <bookmark id="15">
+                <name/>
+                <line>281</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/java/Modelos/Proyecto.java</url>
+            <bookmark id="14">
+                <name/>
+                <line>903</line>
                 <key/>
             </bookmark>
         </file>
@@ -70,13 +83,15 @@
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/web/Vistas/inspectoria/InspectoriaSedeResponsable.xhtml</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Controladores/InspectoriaController.java</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Controladores/SedeController.java</file>
+            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Modelos/Sederesponsable.java</file>
+            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/web/Vistas/proyecto/List.xhtml</file>
+            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/web/Vistas/proyecto/Edit.xhtml</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Modelos/Inspectoria.java</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Controladores/util/JsfUtil.java</file>
-            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Repositorios/ProyectoFacade.java</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Modelos/Proyecto.java</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/web/Vistas/proyecto/ProyectoCompleto.xhtml</file>
             <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Modelos/Sede.java</file>
-            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Controladores/ProyectoController.java</file>
+            <file>file:/C:/Users/ismae/Desktop/GITHUB-2º/PMDM-ProgramacionMultimediaYDispositivosMoviles/ismaelbernadtello/src/java/Controladores/SederesponsableController.java</file>
         </group>
     </open-files>
 </project-private>

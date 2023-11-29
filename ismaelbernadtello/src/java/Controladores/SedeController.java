@@ -262,6 +262,11 @@ public class SedeController implements Serializable {
         return items;
     }
     public void cargarListaSedesResponsable(){
-        listasedSederesponsable = current.getSederesponsableList();
+        if(current != null){
+            listasedSederesponsable = current.getSederesponsableList();
+        }
+        else{
+            listasedSederesponsable = null;
+        }
     }
 }

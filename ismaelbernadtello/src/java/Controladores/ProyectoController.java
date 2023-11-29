@@ -10,6 +10,7 @@ import Modelos.Envio;
 import Modelos.Inspectoria;
 import Modelos.Tipoentidad;
 import Modelos.Sede;
+import Modelos.Tecnico;
 
 import Repositorios.ProyectoFacade;
 
@@ -50,9 +51,35 @@ public class ProyectoController implements Serializable {
     private List<Envio> listaDeEnvioProyectoCompleto;
     private List<Crs> listaCrsProyectoCompleto;
     private Cadsub cadsubProyectoCompleto;
+    private Tecnico tecSeg;
+    private Tecnico tecFor;
+
+    public Tecnico getTecSeg() {
+        return tecSeg;
+    }
+
+    public void setTecSeg(Tecnico tecSeg) {
+        this.tecSeg = tecSeg;
+    }
+
+    public Tecnico getTecFor() {
+        return tecFor;
+    }
+
+    public void setTecFor(Tecnico tecFor) {
+        this.tecFor = tecFor;
+    }
     
     private Entidad entidadProyectoCompleto;
     private Tipoentidad tipoEntidadProyectoCompleto;
+
+    public Proyecto getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Proyecto current) {
+        this.current = current;
+    }
     
 
     public ProyectoController() {
@@ -389,9 +416,8 @@ public class ProyectoController implements Serializable {
         
         entidadProyectoCompleto = ejbFacade.entidadProyectoCompleto(proyectoCompleto);
         tipoEntidadProyectoCompleto = ejbFacade.tipoEntidadProyectoCompleto(proyectoCompleto);
-        
-        
-        
+        tecFor = ejbFacade.tecnicoDeProyectoFormacionCompleto(proyectoCompleto);
+        tecSeg = ejbFacade.tecnicoDeProyectoSeguimientoCompleto(proyectoCompleto); 
     }
     
         

@@ -204,8 +204,13 @@ public class InspectoriaController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
         return getSelectInspectoria(ejbFacade.inspectoriasOrdenadas(), false);
+    }
+    
+    public SelectItem[] getSedesAvailableSelectOne() {
+//        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectSedesInspectoria(sedesPorInspectoria, false);
     }
 
     public Inspectoria getInspectoria(java.lang.Integer id) {
@@ -260,6 +265,20 @@ public class InspectoriaController implements Serializable {
             items[i++] = new SelectItem(x, x.getNomInspectoria());
         }
         return items;
+    }
+    public static SelectItem[] getSelectSedesInspectoria(List<Sede> entities, boolean selectOne) {
+        
+        if(entities != null){
+            SelectItem[] items = new SelectItem[entities.size()];
+            int i = 0;
+
+            for (Sede x : entities) {
+                items[i++] = new SelectItem(x, x.getNomSede());
+            }
+            return items;
+        }
+        else
+            return null;
     }
     public void cargarListaSedes(){
         if(current != null)
