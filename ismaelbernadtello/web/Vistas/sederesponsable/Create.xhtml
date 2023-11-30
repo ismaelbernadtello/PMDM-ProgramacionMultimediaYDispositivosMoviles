@@ -30,10 +30,12 @@
                     <h:outputLabel value="#{bundle.CreateSederesponsableLabel_responsable}" for="responsable" />
                     <h:selectOneMenu id="responsable" value="#{sederesponsableController.selected.responsable}" title="#{bundle.CreateSederesponsableTitle_responsable}" required="true" requiredMessage="#{bundle.CreateSederesponsableRequiredMessage_responsable}">
                         <f:selectItems value="#{responsableController.itemsAvailableSelectOne}"/>
+                        <f:converter converterId="responsableConverter"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateSederesponsableLabel_sede}" for="sede" />
                     <h:selectOneMenu id="sede" value="#{sederesponsableController.selected.sede}" title="#{bundle.CreateSederesponsableTitle_sede}" required="true" requiredMessage="#{bundle.CreateSederesponsableRequiredMessage_sede}">
                         <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"/>
+                        <f:converter converterId="sedeConverter"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

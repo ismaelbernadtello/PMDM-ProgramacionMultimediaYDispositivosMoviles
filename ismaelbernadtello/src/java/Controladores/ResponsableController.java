@@ -194,7 +194,7 @@ public class ResponsableController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Responsable.class)
+    @FacesConverter(forClass = Responsable.class, value="responsableConverter")
     public static class ResponsableControllerConverter implements Converter {
 
         @Override

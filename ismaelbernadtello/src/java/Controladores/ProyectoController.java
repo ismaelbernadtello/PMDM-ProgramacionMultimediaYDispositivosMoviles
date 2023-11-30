@@ -342,6 +342,10 @@ public class ProyectoController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         return getSelectProyecto(ejbFacade.proyectosOrdenados(), false);
     }
+    
+    public SelectItem[] getItemsProyectoSelectOne() {
+        return getSelectProyectoEnvioCreate(ejbFacade.proyectosOrdenados(), false);
+    }
 
     public Proyecto getProyecto(java.lang.Integer id) {
         return ejbFacade.find(id);
@@ -401,37 +405,53 @@ public class ProyectoController implements Serializable {
         return items;
     }
     
+    
+    
+    public static SelectItem[] getSelectProyectoEnvioCreate(List<Proyecto> entities, boolean selectOne) { // le pasamos la lista de Cad
+        int size = selectOne ? entities.size() + 1 : entities.size();
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        if (selectOne) {
+            items[0] = new SelectItem("0", "Elige un proyecto");
+            i++;
+        }//nombre del objeto : y la lista, todos los objetos del mundo mundial son de la superclase Object
+        for (Proyecto x : entities) { // lee objetos de la clase cad
+            items[i++] = new SelectItem(x, x.getCodProyecto().toString()); // le ponemos el objeto cad (x) y el nombre del 
+        }
+        return items;
+    }
+    
 //    public void cargarListaDeEnvioDeUnProyecto(){
 //        listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
 //    }
     
     //Para envio proyecto
     public void cargarListaDeEnvioDeUnProyecto(){
-        if(proyecto != null && proyecto.getNumProyecto() != null){
+        suma = 0.0;
+        diferencia = null;
+        if(proyecto != null){
             listaEnvio = ejbFacade.EnvioPorProyecto(proyecto);
-            mensaje = calcularCositas();
+            if(proyecto.getDineroConcedido() != null)//Si no se le ha concedido dinero no se saca la diferencia
+                mensaje = calcularCositas();
+            else
+                mensaje = "No se ha concedido pasta a este proyecto";
+        }
+    }
+
+    //Para envio proyecto
+    public String calcularCositas(){
+        for(Envio env: listaEnvio)
+            suma += env.getCantidad(); //Sumo las cantidades de los envíos
+        
+        //Si la suma es menor al dinero que se ha concedido quiere decir que los envíos son correctos y no se han  pasado de la cantidad concedida
+        if (suma < proyecto.getDineroConcedido()){ 
+            return suma.toString();
+        }
+        else{
+            return "ERROR"; //Si la suma de los envíos es mayor al dinero concedido, se ve el mensaje "ERROR"
         }
     }
     
-    //Para envio proyecto
-    public String calcularCositas(){
-        suma = 0.0;
-        diferencia = null;
-        
-        for(Envio env: listaEnvio)
-            suma += env.getCantidad();
-        
-        if(proyecto.getDineroConcedido() != null){ //Si no se le ha concedido dinero no se saca la diferencia y sera 0
-            diferencia = proyecto.getDineroConcedido() - suma;
-        }
-        
-        if (diferencia >= 0.0){
-            return diferencia.toString();
-        }
-        else{
-            return "Has gastado más de lo concedido";
-        }
-    }
     
     public void cargarListaProyectoCompleto(){
         inspectoriaProyectoCompleto = ejbFacade.inspectoriaProyectoCompleto(proyectoCompleto);

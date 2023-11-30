@@ -29,7 +29,8 @@
                     <h:inputTextarea rows="4" cols="30" id="comentario" value="#{envioController.selected.comentario}" title="#{bundle.CreateEnvioTitle_comentario}" />
                     <h:outputLabel value="#{bundle.CreateEnvioLabel_proyecto}" for="proyecto" />
                     <h:selectOneMenu id="proyecto" value="#{envioController.selected.proyecto}" title="#{bundle.CreateEnvioTitle_proyecto}" required="true" requiredMessage="#{bundle.CreateEnvioRequiredMessage_proyecto}">
-                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{proyectoController.itemsProyectoSelectOne}"/>
+                        <f:converter converterId="proyectoConverter"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
